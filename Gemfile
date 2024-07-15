@@ -1,2 +1,7 @@
 source "https://rubygems.org"
-gemspec
+gem "github-pages", group: :jekyll_plugins
+gem "json"
+gem "webrick"
+group :jekyll_plugins do
+
+end
