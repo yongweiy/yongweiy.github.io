@@ -1,0 +1,21 @@
+- title: Consolidating Smart Contracts with Behavioral Contracts
+  conference: PLDI'24
+  author: Guannan Wei, Danning Xie, Wuqi Zhang, **Yongwei Yuan**, Zhuo Zhang
+  doi: https://doi.org/10.1145/3656416
+  pdf: https://dl.acm.org/doi/10.1145/3656416?cid=99660777676
+  artifact: https://github.com/Kraks/contract-for-contract
+- title: Trace-Guided Inductive Synthesis of Recursive Functional Programs
+  conference: PLDI'23
+  author: "**Yongwei Yuan**, Arjun Radhakrishna, Roopsha Samanta"
+  doi: https://doi.org/10.1145/3591255
+  pdf: https://dl.acm.org/doi/10.1145/3591255?cid=99660777676
+  artifact: https://github.com/VictorYYW/syrup_artifacts/tree/pldi-2023-artifacts
+  award: Distinguished Paper Award
+- title: Live Pattern Matching with Typed Holes
+  conference: OOPSLA'23
+  author: "**Yongwei Yuan**, Scott Guest, Eric Griffis, Hannah Potter, David Moon, Cyrus Omar"
+  doi: https://doi.org/10.1145/3586048
+  pdf: https://dl.acm.org/doi/10.1145/3586048?cid=99660777676
+  artifact: https://github.com/fplab/pattern-artifacts
+  appendix: assets/pdf/pattern-appendix.pdf
+  award: Distinguished Paper Award

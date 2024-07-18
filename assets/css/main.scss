@@ -7,3 +7,131 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+// @media (min-width: 50em) {
+// .author__avatar {
+//   display: table-cell;
+//   vertical-align: top;
+//   width: 80px;
+//   height: 80px;
+
+//   @include breakpoint($large) {
+//     display: block;
+//     width: auto;
+//     height: auto;
+//   }
+
+//   img {
+//     max-width: 175px;
+//     border-radius: 50%;
+
+//     @include breakpoint($large) {
+//       padding: 5px;
+//       border: 1px solid $border-color;
+//     }
+//   }
+// }
+// }
+
+@media (min-width: 120em) {
+    .about {
+        float:inline-end;
+        width: 70%;
+        padding-inline:100px
+    }
+}
+
+@media (min-width: 100em) {
+    .about {
+        width: 90%;
+        padding-inline:200px
+    }
+}
+
+body {
+  font-size: x-large;
+}
+
+code {
+  font-size: large;
+}
+
+.profile-container {
+  display: flex;
+  align-items: flex-start; /* Aligns items at the top */
+  margin-top: 20px;
+}
+
+.contact-info {
+  text-align: center;
+}
+
+// li should be on the same line separated by |
+.contact-info li {
+  display: inline;
+}
+.contact-info li + li::before {
+  content: " | ";
+}
+
+@media (max-width: 900px) {
+  .profile-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-left, .profile-right {
+    width: 100%; /* Full width on small screens */
+  }
+
+  .profile-left {
+    // center
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: 20px; /* Space between stacked items */
+  }
+}
+
+.profile-left {
+  width: 50%;
+  margin-right: 40px; /* Space between columns */
+}
+
+.profile-left img {
+  height: auto;
+}
+
+.contact-info p {
+  font-size: 1em;
+  margin: 5px 0;
+}
+
+.container .row {
+  display: flex;
+}
+.col-conf {
+  width: 10%;
+  min-width: 6.5em;
+}
+.col-paper {
+  width: 90%;
+}
+.paper-info {
+  display: flex;
+  justify-content: space-between;
+  // margin-top: -1rem;
+  // max-width: 100%;
+  font-size: large;
+}
+.paper-info .btn {
+  font-size: large;
+}
+.paper-info .award {
+  padding: 0.375rem 0.75rem;
+}
+
+.title {
+  font-weight: bolder;
+}
+.author {
+}
