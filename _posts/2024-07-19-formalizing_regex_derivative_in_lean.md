@@ -1,9 +1,8 @@
 ---
-exclude_tags: pandoc
 header-args:lean4: ":tangle
   \\~/Desktop/PL-playground/lean4-playground/regex.lean :comments both"
 id: 5f03b7c8-9fa5-445d-9fae-624fcf91bc2b
-title: [WIP] Derivatives of Regular Expressions
+title: Formalizing Regex Derivative in Lean
 ---
 
 Brzozowski\'s derivative is truly a gem in the literature and surprised
@@ -167,67 +166,4 @@ decreasing_by
   -- )
 
 end Regex
-```
-
-## org → md [[pandoc]{.smallcaps}]{.tag tag-name="pandoc"} {#org-md}
-
-``` {#from-org .elisp}
-(buffer-file-name)
-```
-
-```{=org}
-#+RESULTS: from-org
-```
-``` example
-/home/slark/org-roam/20240128134511-derivatives_of_regular_expressions.org
-```
-
-``` {#pwd .elisp export="none"}
-(file-name-directory (buffer-file-name))
-```
-
-```{=org}
-#+RESULTS: pwd
-```
-``` example
-/home/slark/org-roam/
-```
-
-``` {#filename .elisp var="full=from-org"}
-(file-name-nondirectory full)
-```
-
-```{=org}
-#+RESULTS: filename
-```
-``` example
-20240128134511-derivatives_of_regular_expressions.org
-```
-
-``` {#to-markdown .elisp var="path=from-org dir-for-md=\"~/Desktop/yongweiy.github.io/_posts/\""}
-(let* ((current-date (format-time-string "%Y-%m-%d"))
-       (new-name (replace-regexp-in-string "^[0-9]+-"
-                                           (concat current-date "-")
-                                           (file-name-nondirectory path)))
-       (md-name (replace-regexp-in-string "\\.org$" ".md" new-name))
-       (final-name (concat (expand-file-name dir-for-md) md-name)))
-  final-name)
-```
-
-```{=org}
-#+RESULTS: to-markdown
-```
-``` example
-/home/slark/Desktop/yongweiy.github.io/_posts/2024-07-19-derivatives_of_regular_expressions.md
-```
-
-```{=org}
-#+RESULTS: to_markdown
-```
-``` example
-~/Desktop/yongweiy.github.io/_posts/2024-07-19-derivatives_of_regular_expressions.md
-```
-
-``` {.shell var="from=from-org to=to-markdown" results="silent"}
-sed -e 's/#+begin_src lean/#+begin_src lean/g' $from | pandoc -s -f org -o $to
 ```
