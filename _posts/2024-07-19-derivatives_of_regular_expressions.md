@@ -1,30 +1,37 @@
 ---
-title: Derivatives of Regular Expressions
-toc: true
-toc_sticky: true
-author_profile: false
+exclude_tags: pandoc
+header-args:lean4: ":tangle
+  \\~/Desktop/PL-playground/lean4-playground/regex.lean :comments both"
+id: 5f03b7c8-9fa5-445d-9fae-624fcf91bc2b
+title: [WIP] Derivatives of Regular Expressions
 ---
 
-Brzozowski's derivative is truly a gem in the literature and surprised
+Brzozowski\'s derivative is truly a gem in the literature and surprised
 me with its beauty when I first learned about it towards the end of
 2023, thanks to the reference by Guannan Wei. Derivatives of a language
-`r` with respect to a string π, in a nutshell, is a new language
+$r$ with respect to a string $\pi$, in a nutshell, is a new language
 containing all strings from the input language when appended to π. One
-property of derivatives that initially challenged my understanding is
-$$d_{\pi} r^{\ast} = d_{\pi}r \cdot r^{\ast}$$. Through this post, I aim
+propertty of derivatives that initially challenged my understanding is
+$d_{\pi} r^{\ast} = d_{\pi}r \cdot r^{\ast}$. Through this post, I aim
 to sharpen my skills in proof mechanization and learn some Lean by
 formalizing my reasoning about this intriguing property.
 
-# Definition
+## Mathlib Import
 
 ``` lean
 import Mathlib.Data.Prod.Lex
 import Mathlib.Order.BooleanAlgebra
 import Mathlib.Tactic.Linarith
+```
 
+## Some Auxiliary Definitions
+
+``` lean
 class Denotation (α : Type) (σ : outParam (Type)) where
   denote : α -> Set σ
+```
 
+``` lean
 class EffectiveBooleanAlgebra (α : Type) (σ : outParam (Type))
   extends Denotation α σ, Bot α, Top α, HasCompl α, Inf α, Sup α where
   denote_bot : denote ⊥ = ∅
@@ -32,8 +39,11 @@ class EffectiveBooleanAlgebra (α : Type) (σ : outParam (Type))
   denote_compl : denote (compl a) = univ \ denote a
   denote_inf : denote (a ⊓ b) = denote a ∩ denote b
   denote_sup : denote (a ⊔ b) = denote a ∪ denote b
--- variable (α : Type) (σ : Type)
+```
 
+## Regex Definition
+
+``` lean
 variable (α : Type) in
 inductive Regex where
   | ε : Regex
@@ -44,20 +54,19 @@ inductive Regex where
   | inter : Regex -> Regex -> Regex
   | union : Regex -> Regex -> Regex
 open Regex
+```
 
+``` lean
 infixr:50 " ⬝ "  => concat
 postfix:max "*"  => star
 prefix:max "~"   => neg
 infixr:40 " ⋒ "  => inter
 infixr:35 " ⋓ "  => union
+```
 
-def repeat_cat (R : Regex α) (n : ℕ) : Regex α :=
-  match n with
-  | 0          => ε
-  | Nat.succ n => R ⬝ (repeat_cat R n)
+## Regex Denotation
 
-notation f "⁽" n "⁾" => repeat_cat f n
-
+``` lean
 @[simp]
 def star_metric : Regex α -> (ℕ ×ₗ ℕ)
   | ε => (0, 1)
@@ -72,7 +81,9 @@ def star_metric : Regex α -> (ℕ ×ₗ ℕ)
 instance : WellFoundedRelation (ℕ ×ₗ ℕ) where
   rel := (· < ·)
   wf  := WellFounded.prod_lex WellFoundedRelation.wf WellFoundedRelation.wf
+```
 
+``` lean
 theorem zero_lt_size (r : Regex α) : 0 < (star_metric r).snd :=
   by induction r using Regex.rec with
   | ε | atom _ => simp
@@ -81,8 +92,18 @@ theorem zero_lt_size (r : Regex α) : 0 < (star_metric r).snd :=
     rewrite [heq1] at ih1; rewrite [heq2] at ih2; simp at ih1 ih2; 
     apply Or.intro_left; assumption
   | star r | neg r => simp; split; simp
+```
 
--- instance : Denotation (Regex α) (List σ : outParam (Type)) where
+``` lean
+def repeat_cat (R : Regex α) (n : ℕ) : Regex α :=
+  match n with
+  | 0          => ε
+  | Nat.succ n => R ⬝ (repeat_cat R n)
+
+notation f "⁽" n "⁾" => repeat_cat f n
+```
+
+``` lean
 namespace Regex
 
 variable {α σ : Type} [EffectiveBooleanAlgebra α σ]
@@ -146,4 +167,67 @@ decreasing_by
   -- )
 
 end Regex
+```
+
+## org → md [[pandoc]{.smallcaps}]{.tag tag-name="pandoc"} {#org-md}
+
+``` {#from-org .elisp}
+(buffer-file-name)
+```
+
+```{=org}
+#+RESULTS: from-org
+```
+``` example
+/home/slark/org-roam/20240128134511-derivatives_of_regular_expressions.org
+```
+
+``` {#pwd .elisp export="none"}
+(file-name-directory (buffer-file-name))
+```
+
+```{=org}
+#+RESULTS: pwd
+```
+``` example
+/home/slark/org-roam/
+```
+
+``` {#filename .elisp var="full=from-org"}
+(file-name-nondirectory full)
+```
+
+```{=org}
+#+RESULTS: filename
+```
+``` example
+20240128134511-derivatives_of_regular_expressions.org
+```
+
+``` {#to-markdown .elisp var="path=from-org dir-for-md=\"~/Desktop/yongweiy.github.io/_posts/\""}
+(let* ((current-date (format-time-string "%Y-%m-%d"))
+       (new-name (replace-regexp-in-string "^[0-9]+-"
+                                           (concat current-date "-")
+                                           (file-name-nondirectory path)))
+       (md-name (replace-regexp-in-string "\\.org$" ".md" new-name))
+       (final-name (concat (expand-file-name dir-for-md) md-name)))
+  final-name)
+```
+
+```{=org}
+#+RESULTS: to-markdown
+```
+``` example
+/home/slark/Desktop/yongweiy.github.io/_posts/2024-07-19-derivatives_of_regular_expressions.md
+```
+
+```{=org}
+#+RESULTS: to_markdown
+```
+``` example
+~/Desktop/yongweiy.github.io/_posts/2024-07-19-derivatives_of_regular_expressions.md
+```
+
+``` {.shell var="from=from-org to=to-markdown" results="silent"}
+sed -e 's/#+begin_src lean/#+begin_src lean/g' $from | pandoc -s -f org -o $to
 ```
