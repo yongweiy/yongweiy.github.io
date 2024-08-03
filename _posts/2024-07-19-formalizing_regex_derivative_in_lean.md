@@ -10,7 +10,7 @@ me with its beauty when I first learned about it towards the end of
 2023, thanks to the reference by Guannan Wei. Derivatives of a language
 $r$ with respect to a string $\pi$, in a nutshell, is a new language
 containing all strings from the input language when appended to π. One
-propertty of derivatives that initially challenged my understanding is
+property of derivatives that initially challenged my understanding is
 $d_{\pi} r^{\ast} = d_{\pi}r \cdot r^{\ast}$. Through this post, I aim
 to sharpen my skills in proof mechanization and learn some Lean by
 formalizing my reasoning about this intriguing property.
