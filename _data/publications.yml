@@ -1,3 +1,9 @@
+- title: Derivative-Guided Symbolic Execution
+  conference: POPL'25
+  author: "**Yongwei Yuan**, Zhe Zhou, Julia Belyakova, Suresh Jagannathan"
+  doi: https://doi.org/10.1145/3704886
+  pdf: https://arxiv.org/pdf/2411.02716
+  artifact: https://github.com/yongweiy/HATch
 - title: Consolidating Smart Contracts with Behavioral Contracts
   conference: PLDI'24
   author: Guannan Wei, Danning Xie, Wuqi Zhang, **Yongwei Yuan**, Zhuo Zhang
